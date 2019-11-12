@@ -1,5 +1,7 @@
 {
   "name": "AttendenceScanner",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
