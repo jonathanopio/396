@@ -40,7 +40,9 @@ export class AttendanceLogService {
     return this.logCollection.doc<AttendanceLog>(id).valueChanges();
   }
  
-  updateLog(AttendancelogService: AttendanceLog, id: string) {
+  updateLog(
+    AttendancelogService: AttendanceLog, 
+    id: string) {
     return this.logCollection.doc(id).update(AttendancelogService);
   }
  
