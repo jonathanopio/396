@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { BarcodeScanResult, BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Firebase } from '@ionic-native/firebase/ngx';
+
+
+
 
 @Component({
   selector: 'app-home',
