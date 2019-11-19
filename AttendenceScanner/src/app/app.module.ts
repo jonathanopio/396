@@ -12,10 +12,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 //firebase
 
-import { Firebase } from '@ionic-native/firebase';
+//import { Firebase } from '@ionic-native/firebase';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+//import { AngularFireModule } from 'angularfire2';
+//import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 const firebase = {
   // your firebase web config
@@ -24,8 +24,8 @@ const firebase = {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(firebase), 
-    AngularFirestoreModule,],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,/* AngularFireModule.initializeApp(firebase), 
+    AngularFirestoreModule*/,],
   providers: [
     // Firebase,
     // FcmProvider,

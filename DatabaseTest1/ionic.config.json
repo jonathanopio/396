@@ -1,5 +1,7 @@
 {
   "name": "DatabaseTest1",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
