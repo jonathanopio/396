@@ -1,0 +1,7 @@
+{
+  "name": "qrDemo1",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

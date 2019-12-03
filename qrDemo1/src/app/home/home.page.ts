@@ -7,11 +7,13 @@ import { BarcodeScanResult, BarcodeScanner } from '@ionic-native/barcode-scanner
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
   scannedCode = null;
-  constructor(private BarcodeScanner : BarcodeScanner) {}
+  constructor( private BarcodeScanner : BarcodeScanner,){}
+
   scanCode() {
-    this.BarcodeScanner.scan().then(barcodeData => {
-      this.scannedCode = barcodeData.text;
-    })
+    this.BarcodeScanner.scan().then(barcodeData => {})
   }
 }
+
+
