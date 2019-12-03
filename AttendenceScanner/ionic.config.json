@@ -1,8 +1,0 @@
-{
-  "name": "AttendenceScanner",
-  "integrations": {
-    "cordova": {},
-    "capacitor": {}
-  },
-  "type": "angular"
-}

@@ -1,0 +1,7 @@
+{
+  "name": "qr-att",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
