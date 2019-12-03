@@ -12,7 +12,7 @@ export class HomePage {
   constructor( private BarcodeScanner : BarcodeScanner,){}
 
   scanCode() {
-    this.BarcodeScanner.scan().then(barcodeData => {})
+    this.BarcodeScanner.scan().then(barcodeData => {this.scannedCode = barcodeData.text;})
   }
 }
 
