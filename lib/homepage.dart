@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 static Firestore db = Firestore.instance;
+
   _signOut() async {
     try {
       await widget.auth.signOut();
@@ -66,6 +67,34 @@ static Firestore db = Firestore.instance;
     }
     
   }
+  _classOptions() async{
+    String choices='';
+    DocumentSnapshot stuff = await db.collection('classes').document('classOptions').get();
+    Map<String, dynamic> newStuff =stuff.data;
+    List<dynamic> k =newStuff['classes'];
+    for(int i=0;i<k.length;i++)
+    {
+      choices += k[i]+" ";
+    }
+    showDialog(
+    context: context,
+    builder: (BuildContext context){
+    return AlertDialog(
+          title: new Text("Available classes"),
+          content: new Text(choices),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+    );
+    },
+    ); 
+  }
   _removeClass(dynamic newClass) async { ///Update bad names
     try {
     final FirebaseUser user = await widget.auth.getCurrentUser(); 
@@ -95,6 +124,8 @@ static Firestore db = Firestore.instance;
     
   }
 String dropdownValue = 'One';
+String someClasses ="cs195";
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -113,6 +144,7 @@ String dropdownValue = 'One';
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          //RichText(text: _classOptions(),),
           DropdownButton<String>(
     value: dropdownValue,
     icon: Icon(Icons.arrow_downward),
@@ -163,6 +195,15 @@ String dropdownValue = 'One';
               _removeClass(dropdownValue);
             },
           ),
+           RaisedButton(
+            child: Text('show available classes'),
+            onPressed: () {
+              _classOptions();
+            },
+          ),
+          Text(
+            (someClasses)
+          )
         ],
       )),
       
