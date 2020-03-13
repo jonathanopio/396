@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:qr_base/settings.dart';
 import 'authentication.dart';
 import 'qr.dart';
+import 'userInfo.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -23,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 static Firestore db = Firestore.instance;
-
+var userData = new userInfo();
   _signOut() async {
     try {
       await widget.auth.signOut();
@@ -33,49 +35,14 @@ static Firestore db = Firestore.instance;
     }
   }
     _addClass(String newClass) async { ///Update bad names
-    try {
-    final FirebaseUser user = await widget.auth.getCurrentUser(); 
-    final String name = user.email;
-    DocumentSnapshot stuff = await db.collection('userProfile').document(name).get();
-    Map<String, dynamic> newStuff =stuff.data;
-     List<dynamic> k =newStuff['classes'];
-     bool b=true;
-     if(k!=null){
-     for(int i=0; i<k.length;i++)// looks through to see if class exists already before adding
-     {
-       if(k[i]==newClass)
-       {
-        b=false;
-       }
-     }
-    if(b){
-    db.collection('userProfile').document(name)
-                    .setData({
-                  'name' : name,
-                  "classes": (k+[newClass])
-    }).catchError((err) => print(err));
-    }}else{db.collection('userProfile').document(name)
-                    .setData({
-                  'name' : name,
-                  "classes": ([newClass])
-    }).catchError((err) => print(err));
-    }
-
-    }
-    catch (e) {
-      print(e);
-    }
     
+    userData.addClass(newClass);
   }
   _classOptions() async{
-    String choices='';
-    DocumentSnapshot stuff = await db.collection('classes').document('classOptions').get();
-    Map<String, dynamic> newStuff =stuff.data;
-    List<dynamic> k =newStuff['classes'];
-    for(int i=0;i<k.length;i++)
-    {
-      choices += k[i]+" ";
-    }
+
+    userData.updateClassOptions();
+    String choices= userData.getClasseOptions();
+    
     showDialog(
     context: context,
     builder: (BuildContext context){
@@ -184,9 +151,10 @@ String someClasses ="cs195";
             },
           ),
           RaisedButton(
-            child: Text('edit '),
+            child: Text('go to settings '),
             onPressed: () {
-              Null;
+              userData.updateAll();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => settings(userData)));
             },
           ),
           RaisedButton(
